@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="Tabs.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tabs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <MenuBar Grid.Row="0">
+            <MenuBarItem Title="Archivo">
+                <MenuFlyoutItem
+                    x:Name="OpenFileItem"
+                    Click="OpenFileItem_Click"
+                    Text="Abrir" 
+                                Icon="OpenFile"/>
+                <MenuFlyoutItem Text="Guardar"/>
+                <MenuFlyoutItem Text="Guardar como"/>
+            </MenuBarItem>
+            <MenuBarItem Title="Vista">
+                <MenuFlyoutSubItem Text="Tema">
+                    <muxc:RadioMenuFlyoutItem 
+                        x:Name="RadioOscuro"
+                        Click="RadioOscuro_Click"
+                        Text="Oscuro"/>
+                    <muxc:RadioMenuFlyoutItem 
+                        
+                        x:Name="RadioClaro"
+                        Text="Claro" Click="RadioClaro_Click"/>
+                </MenuFlyoutSubItem>
+           </MenuBarItem>
+        </MenuBar>
+        <muxc:TabView
+            x:Name="MyTabView"
+            Grid.Row="1" 
+            AddTabButtonClick="TabView_AddTabButtonClick" TabCloseRequested="TabView_TabCloseRequested"
+            />
+    </Grid>
+</Page>
