@@ -21,7 +21,10 @@
                     Click="OpenFileItem_Click"
                     Text="Abrir" 
                                 Icon="OpenFile"/>
-                <MenuFlyoutItem Text="Guardar"/>
+                <MenuFlyoutItem 
+                    x:Name="SaveFileItem"
+                    Click="SaveFileItem_Click"
+                    Text="Guardar"/>
                 <MenuFlyoutItem Text="Guardar como"/>
             </MenuBarItem>
             <MenuBarItem Title="Vista">

@@ -26,14 +26,18 @@ namespace Tabs
     public sealed partial class MainPage : Page
     {
         ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        FileOpenPicker openPicker = new FileOpenPicker();
+        public static FileOpenPicker openPicker = new FileOpenPicker();
 
         private void initFilePicker()
         {
             openPicker.ViewMode = PickerViewMode.Thumbnail;
+            //
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            //
             openPicker.FileTypeFilter.Add(".txt");
+            //
             openPicker.FileTypeFilter.Add(".sql");
+            //
             openPicker.FileTypeFilter.Add(".js");
         }
         public void themeConfig()
@@ -106,6 +110,15 @@ namespace Tabs
                 //OutputTextBlock.Text = "Picked photo: " + file.Name;
             }
             
+        }
+        private void SaveFileItem_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (muxc.TabViewItem)MyTabView.SelectedItem;
+            Frame f = (Frame)item.Content;
+            FilePage p = (FilePage)f.Content;
+            p.SaveFile() ;
+
+
         }
     }
 }

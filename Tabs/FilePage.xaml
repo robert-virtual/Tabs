@@ -23,6 +23,7 @@
                    x:Name="LineNumbers"/>
 
         <TextBox
+            
             TextChanged="RebText_TextChanged"
             x:Name="TextContent"
             Grid.Column="1"

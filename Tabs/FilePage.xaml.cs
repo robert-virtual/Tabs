@@ -7,6 +7,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Text;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -26,12 +27,15 @@ namespace Tabs
     /// </summary>
     public sealed partial class FilePage : Page
     {
-        private double height { get; set; } 
-        private double RowHeight { get; set; }
+        private double height { get; set; }
+        public  string TextAGuardar;
+        public  StorageFile file;
+        public  FileSavePicker savePicker = new FileSavePicker();
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            StorageFile file = (StorageFile)e.Parameter;
+             file = (StorageFile)e.Parameter;
             if (file != null)
             {
             string text = await FileIO.ReadTextAsync(file);
@@ -40,13 +44,32 @@ namespace Tabs
 
             }
         }
+        private void initPicker()
+        {
+            savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+            savePicker.FileTypeChoices.TryAdd("Plain Text",new List<string>() { ".txt"});
+
+            savePicker.SuggestedFileName = "Nuevo archivo";
+        }
         public FilePage()
         {
             this.InitializeComponent();
             var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             height = bounds.Height*0.95;
+            initPicker();
         }
+        public async  void SaveFile()
+        {
+            if (file != null)
+            {
+                await FileIO.WriteTextAsync(file, TextAGuardar);
+                return;
+            }
+            file = await savePicker.PickSaveFileAsync();
+            await FileIO.WriteTextAsync(file, TextAGuardar);
 
+
+        }
         private void RebText_TextChanged(object sender, RoutedEventArgs e)
         {
             //Clear line numbers
@@ -57,7 +80,7 @@ namespace Tabs
             //ITextRange text = TextContent.Document.GetRange(0, TextConstants.MaxUnitCount);
             //string s = text.Text;
             string s = TextContent.Text;
-
+            TextAGuardar = s;
             if (s != "\r")
             {
                 //Replace return char with some char that will be never used (I hope...)
