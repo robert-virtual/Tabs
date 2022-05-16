@@ -25,7 +25,6 @@
                     x:Name="SaveFileItem"
                     Click="SaveFileItem_Click"
                     Text="Guardar"/>
-                <MenuFlyoutItem Text="Guardar como"/>
             </MenuBarItem>
             <MenuBarItem Title="Vista">
                 <MenuFlyoutSubItem Text="Tema">

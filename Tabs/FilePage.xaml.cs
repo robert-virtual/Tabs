@@ -60,13 +60,29 @@ namespace Tabs
         }
         public async  void SaveFile()
         {
+            string name = "";
+            try
+            {
+                name = TextAGuardar.Substring(0, 10);
+            }
+            catch (Exception)
+            {
+                name = "Nuevo Archivo";
+            }
+            
+            savePicker.SuggestedFileName = name;
+
             if (file != null)
             {
                 await FileIO.WriteTextAsync(file, TextAGuardar);
                 return;
             }
             file = await savePicker.PickSaveFileAsync();
-            await FileIO.WriteTextAsync(file, TextAGuardar);
+            if (file != null)
+            {
+                await FileIO.WriteTextAsync(file, TextAGuardar);
+
+            }
 
 
         }

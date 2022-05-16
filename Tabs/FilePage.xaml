@@ -35,16 +35,7 @@
             
             />
     
-        <!--<RichEditBox
-            TextChanged="RebText_TextChanged"
-            x:Name="TextContent"
-            Grid.Column="1"
-            MinHeight="{x:Bind height}"
-            AcceptsReturn="True" 
-            TextWrapping="Wrap" 
-            ScrollViewer.VerticalScrollBarVisibility="Auto" 
-            
-            />-->
+       
     
        
     
